@@ -23,7 +23,10 @@ async function getTodos(){
 
 
 function App() {
-  const defaultTodos = getTodos();
+  const defaultTodos = [
+    { text: "cortar cebolla", completed: true},
+    { text: "comprar pan", completed: false}
+  ]
   //States
   const [todos, setTodos] = React.useState(defaultTodos);
   const [searchValue, setSearchValue] = React.useState("");
