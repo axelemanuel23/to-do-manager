@@ -4,24 +4,6 @@ import { ToDoSearch } from "./ToDoSearch/ToDoSearch";
 import { ToDoList } from "./ToDoList/ToDoList";
 import { CreateToDoButton } from "./CreateToDoButton/CreateToDoButton";
 
-async function getTodos(){
-  try{
-      const res = await fetch("https://exampleeapp.herokuapp.com/api/v1/todomanager",
-      {
-          headers: {
-              "APIKEY": "axel"
-          }
-      })
-      const body = await res.json();
-      console.log(body.data);
-      return body.data;
-  }catch(err){
-      console.log(err)
-  }
-} 
-
-
-
 function App() {
   const defaultTodos = [
     { text: "cortar cebolla", completed: true},
