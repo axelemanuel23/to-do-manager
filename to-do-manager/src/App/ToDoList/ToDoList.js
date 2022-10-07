@@ -3,6 +3,7 @@ import { ToDoItem } from "./ToDoItem/ToDoItem";
 import "./ToDoList.css";
 
 function ToDoList({todos, setTodos}){
+    
     const completeTodo = (text) => {
         const todoIndex = todos.findIndex(todo => todo.text === text);
         const newTodos = [...todos];

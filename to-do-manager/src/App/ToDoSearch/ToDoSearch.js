@@ -10,7 +10,7 @@ function ToDoSearch({searchValue, setSearchValue}){
         <React.Fragment>
             <input
                 className="TodoSearch"
-                placeholder="Escribe algo"
+                placeholder="Filtrar Tareas"
                 value={searchValue}
                 onChange={onSearchValueChange}/>
         </React.Fragment>
