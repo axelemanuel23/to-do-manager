@@ -1,13 +1,27 @@
 import React from "react";
 import "./ToDoItem.css";
 
-function ToDoItem(props){
+function ToDoItem({text, completed, onComplete, onDelete}){
     return (
         <React.Fragment>
             <li className="TodoItem">
-                <span className={`Icon Icon-check ${props.completed && "Icon-check--active"}`}>C</span>
-                <p className={`TodoItem-p ${props.completed && "TodoItem-p--active"}`}>{props.text}</p>
-                <span className="Icon Icon-delete">X</span>
+                <span
+                    className={`Icon Icon-check ${completed && "Icon-check--active"}`}
+                    onClick={onComplete}
+                >
+                    C
+                </span>
+                <p 
+                    className = {`TodoItem-p ${completed && "TodoItem-p--complete"}`}
+                >
+                        {text}
+                </p>
+                <span
+                    className="Icon Icon-delete"
+                    onClick={onDelete}
+                >
+                    X
+                </span>
             </li>
         </React.Fragment>
     )
