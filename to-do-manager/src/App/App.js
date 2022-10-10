@@ -3,10 +3,32 @@ import { ToDoCounter } from "./ToDoCounter/ToDoCounter";
 import { ToDoSearch } from "./ToDoSearch/ToDoSearch";
 import { ToDoList } from "./ToDoList/ToDoList";
 import { CreateToDoButton } from "./CreateToDoButton/CreateToDoButton";
+import axios from "axios";
+
 
 function App() {
+  async function getTodos(){
+    try{
+      const res = await axios.get("https://exampleeapp.herokuapp.com/api/v1/todomanager", {
+        headers: {
+          "APIKEY": "axel"
+        }
+      })
+      console.log(res.data.data);
+      setTodos(res.data.data);
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  getTodos()
+
+  React.useEffect(() => {
+    getTodos();
+  })
+
   const defaultTodos = [
-    { text: "cortar cebolla", completed: true},
+    { text: "cortar cebolla hardcodeado", completed: true},
     { text: "comprar pan", completed: false}
   ]
   //States
