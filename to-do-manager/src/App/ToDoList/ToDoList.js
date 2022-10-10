@@ -2,22 +2,22 @@ import React from "react";
 import { ToDoItem } from "./ToDoItem/ToDoItem";
 import "./ToDoList.css";
 
-function ToDoList({todos, setTodos}){
-    
-    const completeTodo = (text) => {
-        const todoIndex = todos.findIndex(todo => todo.text === text);
-        const newTodos = [...todos];
-        newTodos[todoIndex].completed = true;
-        setTodos(newTodos);
-        console.log(newTodos);
+function ToDoList({todos, saveTodos}){
+
+    const completeTodo = (id) => {
+        const todoIndex = todos.findIndex(todo => todo._id === id);
+        const updatedtodo = todos[todoIndex];
+        updatedtodo[todoIndex].completed = true;
+        saveTodos(updatedtodo);
+        console.log(updatedtodo);
     }
 
-    const deleteTodo = (text) => {
-        const todoIndex = todos.findIndex(todo => todo.text === text);
-        const newTodos = [...todos];
-        newTodos.splice([todoIndex], 1);
-        setTodos(newTodos);
-    }
+    // const deleteTodo = (_id) => {
+    //     const todoIndex = todos.findIndex(todo => todo._id === _id);
+    //     const newTodos = [...todos];
+    //     newTodos.splice([todoIndex], 1);
+    //     setTodos(newTodos);
+    // }
 
     return (
         <React.Fragment>
@@ -25,11 +25,11 @@ function ToDoList({todos, setTodos}){
                 <ul>
                     {todos.map((todo) => (
                         <ToDoItem
-                            key={todo.text}
+                            _id={todo._id}
                             text={todo.text}
                             completed={todo.completed}
-                            onComplete={() => completeTodo(todo.text)}
-                            onDelete={() => deleteTodo(todo.text)}
+                            onComplete={() => completeTodo(todo._id)}
+                            //onDelete={() => deleteTodo(todo._id)}
                         />
                     ))}
                 </ul>

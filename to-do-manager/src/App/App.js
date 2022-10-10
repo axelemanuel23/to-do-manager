@@ -3,29 +3,48 @@ import { ToDoCounter } from "./ToDoCounter/ToDoCounter";
 import { ToDoSearch } from "./ToDoSearch/ToDoSearch";
 import { ToDoList } from "./ToDoList/ToDoList";
 import { CreateToDoButton } from "./CreateToDoButton/CreateToDoButton";
+const { ToDoService } = require("./services/services");
 
-async function getTodos(){
-  try{
-      const res = await fetch("https://exampleeapp.herokuapp.com/api/v1/todomanager",
-      {
-          headers: {
-              "APIKEY": "axel"
-          }
-      })
-      const body = await res.json();
-      console.log(body.data);
-      return body.data;
-  }catch(err){
-      console.log(err)
+
+
+function useGetTodos(initialValue){
+  const service = new ToDoService();
+  const todosApi = service.getTodos();
+  let initialTodos = [];
+    
+  if(!todosApi){
+    initialTodos = initialValue;
+  }else{
+    initialTodos = todosApi;
   }
-} 
+  const [ todos, setTodos ] = React.useState[initialTodos];
+
+  const saveTodos = (todo) => {
+    service.saveTodos(todo);
+    const todoIndex = todos.findIndex(item => item._id === todo._id);
+    let updatedtodos = [...todos];
+    updatedtodos.splice([todoIndex], 1);
+    updatedtodos = {
+      todo,
+      ...updatedtodos
+    }
+    setTodos(updatedtodos)
+  }
+
+  return [ todos , saveTodos]
+}
 
 
 
 function App() {
-  const defaultTodos = getTodos();
+  
+  const defaultTodos = [   
+    { _id: 1, text: "cortar cebolla hardcodeado", completed: false },
+    { _id: 2, text: "cortar carne", completed: false },
+  ];
+
   //States
-  const [todos, setTodos] = React.useState(defaultTodos);
+  const [todos, saveTodos] = useGetTodos(defaultTodos);
   const [searchValue, setSearchValue] = React.useState("");
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
@@ -55,7 +74,7 @@ function App() {
           />
           <ToDoList
             todos={searchedTodos}
-            setTodos={setTodos}
+            setTodos={saveTodos}
           />
           <CreateToDoButton/>
     </React.Fragment>

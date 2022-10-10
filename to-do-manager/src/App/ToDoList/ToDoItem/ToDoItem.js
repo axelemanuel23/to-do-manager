@@ -1,7 +1,7 @@
 import React from "react";
 import "./ToDoItem.css";
 
-function ToDoItem({text, completed, onComplete, onDelete}){
+function ToDoItem({text, completed, onComplete}){
     return (
         <React.Fragment>
             <li className="TodoItem">
@@ -18,7 +18,7 @@ function ToDoItem({text, completed, onComplete, onDelete}){
                 </p>
                 <span
                     className="Icon Icon-delete"
-                    onClick={onDelete}
+                    //onClick={onDelete}
                 >
                     X
                 </span>
