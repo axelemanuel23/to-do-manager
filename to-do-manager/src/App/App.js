@@ -3,36 +3,33 @@ import { ToDoCounter } from "./ToDoCounter/ToDoCounter";
 import { ToDoSearch } from "./ToDoSearch/ToDoSearch";
 import { ToDoList } from "./ToDoList/ToDoList";
 import { CreateToDoButton } from "./CreateToDoButton/CreateToDoButton";
-import axios from "axios";
+import { useApiTodos } from './CustomHooks/CustomHooks';
+import { getTodos } from './services/services';
 
+const defaultTodos = [
+    { _id: 1, text: "cortar cebolla hardcodeado", completed: true},
+    { _id: 2,text: "comprar pan", completed: false}
+  ]
 
 function App() {
-  async function getTodos(){
+
+  React.useEffect(async () => {
+    let initialState = [];
     try{
-      const res = await axios.get("https://exampleeapp.herokuapp.com/api/v1/todomanager", {
-        headers: {
-          "APIKEY": "axel"
+        const apitodos = await getTodos();
+        if(!apitodos){
+            initialState = defaultTodos;
+        }else{
+            initialState = apitodos;
         }
-      })
-      console.log(res.data.data);
-      setTodos(res.data.data);
+        saveTodo(initialState);
     }catch(err){
-      console.log(err)
+        console.log(err)
     }
-  }
-
-  getTodos()
-
-  React.useEffect(() => {
-    getTodos();
   })
-
-  const defaultTodos = [
-    { text: "cortar cebolla hardcodeado", completed: true},
-    { text: "comprar pan", completed: false}
-  ]
+  
   //States
-  const [todos, setTodos] = React.useState(defaultTodos);
+  const [todos, saveTodo] = useApiTodos(defaultTodos);
   const [searchValue, setSearchValue] = React.useState("");
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
@@ -62,7 +59,7 @@ function App() {
           />
           <ToDoList
             todos={searchedTodos}
-            setTodos={setTodos}
+            setTodos={saveTodo}
           />
           <CreateToDoButton/>
     </React.Fragment>
