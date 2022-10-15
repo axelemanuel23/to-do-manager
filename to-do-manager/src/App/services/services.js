@@ -1,16 +1,18 @@
 const axios = require("axios");
 
-async function getTodos(){
+async function getTodos(apikey){
     try{
       const res = await axios.get("https://exampleeapp.herokuapp.com/api/v1/todomanager", {
         headers: {
-          "APIKEY": "axel"
+          "APIKEY": apikey
         }
       })
-      return res.data.data;
+      const todos = res.data.data;
+      console.log(todos);
+      return todos;
     }catch(err){
       console.log(err)
     }
 }
 
-export { getTodos }
+module.exports = { getTodos }
