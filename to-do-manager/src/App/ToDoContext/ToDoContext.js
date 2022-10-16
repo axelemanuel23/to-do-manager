@@ -1,18 +1,12 @@
 import React from "react";
 import { useLocalStorage } from "../CustomHooks/CustomHooks";
 
-
 const TodoContext = React.createContext();
 
 function TodoProvider(props){
-
-    const defaultTodos = [
-        { _id: 1, text: "cortar cebolla", completed: true},
-        { _id: 2,text: "comprar pan", completed: false}
-    ];
-
-    const [todos, setTodos] = useLocalStorage("TODOS_V1", defaultTodos);
-    const [searchValue, setSearchValue] = React.useState("");
+    const [ todos, setTodos ] = useLocalStorage("TODOS_V1", []);
+    const [ searchValue, setSearchValue ] = React.useState("");
+    const [ openModal , setOpenModal ] = React.useState(false);
   
     const completedTodos = todos.filter(todo => !!todo.completed).length;
     const totalTodos = todos.length;
@@ -53,6 +47,8 @@ function TodoProvider(props){
             searchedTodos,
             completeTodo,
             deleteTodo,
+            setOpenModal,
+            openModal,
         }}>
             {props.children}
         </TodoContext.Provider>
