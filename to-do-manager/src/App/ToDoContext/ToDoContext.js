@@ -4,7 +4,7 @@ import { useLocalStorage } from "../CustomHooks/CustomHooks";
 const TodoContext = React.createContext();
 
 function TodoProvider(props){
-    const [ todos, setTodos ] = useLocalStorage("TODOS_V1", []);
+    const [ todos, setTodos ] = useLocalStorage();
     const [ searchValue, setSearchValue ] = React.useState("");
     const [ openModal , setOpenModal ] = React.useState(false);
   
@@ -23,12 +23,20 @@ function TodoProvider(props){
       })
     }
     
+    const addTodo = (text) => {
+      const newTodos = [...todos];
+      newTodos.push({
+        completed: false,
+        text: text
+      });
+      setTodos(newTodos);
+  }
+
     const completeTodo = (text) => {
         const todoIndex = todos.findIndex(todo => todo.text === text);
         const newTodos = [...todos];
         newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
         setTodos(newTodos);
-        console.log(newTodos);
     }
 
     const deleteTodo = (text) => {
@@ -49,6 +57,7 @@ function TodoProvider(props){
             deleteTodo,
             setOpenModal,
             openModal,
+            addTodo,
         }}>
             {props.children}
         </TodoContext.Provider>

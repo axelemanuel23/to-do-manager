@@ -5,6 +5,7 @@ import { ToDoList } from "./ToDoList/ToDoList";
 import { CreateToDoButton } from "./CreateToDoButton/CreateToDoButton";
 import { Modal } from "./Modal/index";
 import { TodoContext } from "./ToDoContext/ToDoContext";
+import { TodoForm } from './ToDoForm';
 
 function App() {
   const { openModal } = React.useContext( TodoContext );
@@ -17,7 +18,7 @@ function App() {
         !!openModal && 
           (
             <Modal>
-              <p>Soy un modal </p>
+              <TodoForm />
             </Modal>
           )
         }
