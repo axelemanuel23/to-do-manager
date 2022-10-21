@@ -17,7 +17,6 @@ function useLocalStorage(){
                         }
                     });
                     const newTodos = [...response.data.data];
-                    console.log(newTodos);
                     setTodos(newTodos)
                 }catch(err){
                     setError(err);

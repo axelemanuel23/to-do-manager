@@ -45,11 +45,12 @@ function TodoProvider(props){
                 ,
               {
                 headers: {
-                  "APIKEY": "axel"
+                  "APIKEY": "axel",
+                  'Access-Control-Allow-Origin': '*'
               }});
-            console.log(updatedTodo);
-            console.log(response);
-            setTodos(newTodos);
+            if(response.status===200){
+              setTodos(newTodos);
+            }
           }catch(err){
             console.log(err);
           }
