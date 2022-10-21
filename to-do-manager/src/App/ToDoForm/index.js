@@ -31,7 +31,6 @@ function TodoForm(){
             <div className="TodoForm-buttonContainer">
                 <button className="TodoForm-button TodoForm-button--cancel" type="button" onClick={onCancel}>Cancelar</button>
                 <button className="TodoForm-button TodoForm-button--add" type="submit">Añadir</button>
-                <button></button>
             </div>
         </form>
     )
