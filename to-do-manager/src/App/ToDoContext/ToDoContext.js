@@ -8,7 +8,8 @@ function TodoProvider(props){
     const [ todos, setTodos, error, loading ] = useLocalStorage();
     const [ searchValue, setSearchValue ] = React.useState("");
     const [ openModal , setOpenModal ] = React.useState(false);
-  
+
+    const url = "https://exampleeapp.herokuapp.com/api/v1/todomanager/";  
     const completedTodos = todos.filter(todo => !!todo.completed).length;
     const totalTodos = todos.length;
   
@@ -25,12 +26,28 @@ function TodoProvider(props){
     }
     
     const addTodo = (text) => {
-      const newTodos = [...todos];
-      newTodos.push({
-        completed: false,
-        text: text
-      });
-      setTodos(newTodos);
+      try{
+        const postTodo = async () => {
+          const newTodo = {
+            text: text,
+            completed: false,
+          }
+          const newTodos = [...todos];
+          newTodos.push(newTodo);
+          const response = await axios.post(url, newTodo, {
+            mode: "cors",
+            credentials: "include",
+            headers: {
+              "APIKEY": "axel",
+          }});
+          if(response.status===201){
+            setTodos(newTodos);
+          }
+        }
+        postTodo();
+      }catch(err){
+        console.log(err);
+      }      
   }
 
     const completeTodo = (text) => {
@@ -40,7 +57,6 @@ function TodoProvider(props){
         newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
         const updateTodo = async () => {
           try{
-            const url = "https://exampleeapp.herokuapp.com/api/v1/todomanager/";
             const response = await axios.patch(url + updatedTodo._id, 
                   updatedTodo 
                 ,
@@ -60,10 +76,25 @@ function TodoProvider(props){
         updateTodo();
     }
     const deleteTodo = (text) => {
-        const todoIndex = todos.findIndex(todo => todo.text === text);
-        const newTodos = [...todos];
-        newTodos.splice([todoIndex], 1);
-        setTodos(newTodos);
+        try{
+          const eraseTodo = async () => {
+            const todoIndex = todos.findIndex(todo => todo.text === text);
+            const newTodos = [...todos];
+            const deletedTodo = newTodos[todoIndex];
+            const response = await axios.delete(url + deletedTodo._id, {
+              mode: "cors",
+              credentials: "include",
+              headers: {
+                "APIKEY": "axel",
+            }})
+            if(response.status===200){
+              newTodos.splice([todoIndex], 1);
+            setTodos(newTodos);
+            }
+          }
+        }catch(err){
+          console.log(err)
+        }
     }
 
     return (

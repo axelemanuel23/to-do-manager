@@ -19,10 +19,8 @@ function useLocalStorage(){
                         }
                     });
                     const newTodos = [...response.data.data];
-                    console.log(newTodos);
                     setTodos(newTodos)
                 }catch(err){
-                    console.log("error en la peticion");
                     setError(err);
                 }finally{
                     setLoading(false)
