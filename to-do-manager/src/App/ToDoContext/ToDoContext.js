@@ -40,10 +40,9 @@ function TodoProvider(props){
         newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
         const updateTodo = async () => {
           try{
-            const response = await axios.patch("https:/exampleeapp.herokuapp.com/api/v1/todomanager/" + updatedTodo._id,{
-                data: { 
+            const response = await axios.patch("https:/exampleeapp.herokuapp.com/api/v1/todomanager/" + updatedTodo._id, 
                   updatedTodo 
-                }},
+                ,
               {
                 headers: {
                   "APIKEY": "axel"
