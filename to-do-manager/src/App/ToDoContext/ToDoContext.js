@@ -1,10 +1,11 @@
 import React from "react";
-import { useLocalStorage } from "../CustomHooks/CustomHooks";
+import { useLocalStorage } from "./CustomHooks";
+import axios from "axios";
 
 const TodoContext = React.createContext();
 
 function TodoProvider(props){
-    const [ todos, setTodos ] = useLocalStorage();
+    const [ todos, setTodos, error, loading ] = useLocalStorage();
     const [ searchValue, setSearchValue ] = React.useState("");
     const [ openModal , setOpenModal ] = React.useState(false);
   
@@ -35,10 +36,27 @@ function TodoProvider(props){
     const completeTodo = (text) => {
         const todoIndex = todos.findIndex(todo => todo.text === text);
         const newTodos = [...todos];
+        const updatedTodo = newTodos[todoIndex];
         newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
-        setTodos(newTodos);
+        const updateTodo = async () => {
+          try{
+            const response = await axios.patch("https:/exampleeapp.herokuapp.com/api/v1/todomanager/" + updatedTodo._id,{
+                data: { 
+                  updatedTodo 
+                }},
+              {
+                headers: {
+                  "APIKEY": "axel"
+              }});
+            console.log(updatedTodo);
+            console.log(response);
+            setTodos(newTodos);
+          }catch(err){
+            console.log(err);
+          }
+        }
+        updateTodo();
     }
-
     const deleteTodo = (text) => {
         const todoIndex = todos.findIndex(todo => todo.text === text);
         const newTodos = [...todos];
@@ -58,6 +76,8 @@ function TodoProvider(props){
             setOpenModal,
             openModal,
             addTodo,
+            error,
+            loading,
         }}>
             {props.children}
         </TodoContext.Provider>
