@@ -7,7 +7,7 @@ function TodoForm(){
     const { addTodo, setOpenModal } = React.useContext(TodoContext);
 
     const onCancel = () => {
-        setNewTodoValue(""),
+        setNewTodoValue("");
         setOpenModal(false)
     }
 
