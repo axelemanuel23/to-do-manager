@@ -13,6 +13,7 @@ function useLocalStorage(){
                 try{
                     const response = await axios.get(url, {
                         headers: {
+                            "Access-Control-Allow-Origin": "*",
                             "APIKEY": "axel"
                         }
                     });
