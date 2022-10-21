@@ -44,6 +44,7 @@ function TodoProvider(props){
                   updatedTodo 
                 ,
               {
+                mode: "no-cors",
                 headers: {
                   "APIKEY": "axel",
                   'Access-Control-Allow-Origin': '*'
