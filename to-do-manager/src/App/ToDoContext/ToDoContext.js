@@ -44,6 +44,8 @@ function TodoProvider(props){
                   updatedTodo 
                 ,
               {
+                mode: "cors",
+                credentials: "include",
                 headers: {
                   "APIKEY": "axel",
               }});
