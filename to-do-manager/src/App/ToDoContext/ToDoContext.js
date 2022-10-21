@@ -92,6 +92,7 @@ function TodoProvider(props){
             setTodos(newTodos);
             }
           }
+          eraseTodo();
         }catch(err){
           console.log(err)
         }
