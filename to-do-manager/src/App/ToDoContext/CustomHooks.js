@@ -12,10 +12,8 @@ function useLocalStorage(){
             const getTodos = async () => {
                 try{
                     const response = await axios.get(url, {
-                        mode: "cors",
                         headers: {
-                            "APIKEY": "axel",
-                            'Access-Control-Allow-Origin': '*'
+                            "APIKEY": "axel"
                         }
                     });
                     const newTodos = [...response.data.data];
