@@ -6,7 +6,7 @@ function useLocalStorage(){
     const [ loading, setLoading ] = React.useState(true);
     const [ todos, setTodos ] = React.useState([]);
 
-    const url = "https://exampleeapp.herokuapp.com/api/v1/todomanager";
+    const url = process.env.APIURL;
 
     React.useEffect(() => {
             const getTodos = async () => {
@@ -15,7 +15,7 @@ function useLocalStorage(){
                         mode: "cors",
                         credentials: "include",
                         headers: {
-                            "APIKEY": "axel",
+                            "APIKEY": process.env.APIKEY,
                         }
                     });
                     const newTodos = [...response.data.data];
