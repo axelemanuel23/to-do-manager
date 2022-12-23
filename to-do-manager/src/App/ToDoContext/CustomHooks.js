@@ -6,8 +6,8 @@ function useLocalStorage(){
     const [ loading, setLoading ] = React.useState(true);
     const [ todos, setTodos ] = React.useState([]);
 
-    const url = "https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager";
-    const apikey = "axel";
+    const url = process.env.APIURL;
+    const apikey = process.env.APIKEY;
 
     React.useEffect(() => {
             const getTodos = async () => {
