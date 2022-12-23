@@ -8,11 +8,11 @@ function useLocalStorage(){
     React.useEffect(() => {
             const getTodos = async () => {
                 try{
-                    const response = await axios.get(process.env.APIURL, {
+                    const response = await axios.get("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager", {
                         mode: "cors",
                         credentials: "include",
                         headers: {
-                            "APIKEY": process.env.APIKEY,
+                            "APIKEY": "axel",
                         }
                     });
                     const newTodos = [...response.data.data];
