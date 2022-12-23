@@ -9,7 +9,7 @@ function TodoProvider(props){
     const [ searchValue, setSearchValue ] = React.useState("");
     const [ openModal , setOpenModal ] = React.useState(false);
 
-    const url = "https://exampleeapp.herokuapp.com/api/v1/todomanager/";  
+    const url = "https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager";  
     const completedTodos = todos.filter(todo => !!todo.completed).length;
     const totalTodos = todos.length;
   
