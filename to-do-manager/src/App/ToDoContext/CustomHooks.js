@@ -5,18 +5,14 @@ function useLocalStorage(){
     const [ error, setError ] = React.useState(false);
     const [ loading, setLoading ] = React.useState(true);
     const [ todos, setTodos ] = React.useState([]);
-
-    const url = process.env.APIURL;
-    const apikey = process.env.APIKEY;
-
     React.useEffect(() => {
             const getTodos = async () => {
                 try{
-                    const response = await axios.get(url, {
+                    const response = await axios.get(process.env.APIURL, {
                         mode: "cors",
                         credentials: "include",
                         headers: {
-                            "APIKEY": apikey,
+                            "APIKEY": process.env.APIKEY,
                         }
                     });
                     const newTodos = [...response.data.data];
