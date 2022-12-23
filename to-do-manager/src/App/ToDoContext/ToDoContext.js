@@ -9,7 +9,6 @@ function TodoProvider(props){
     const [ searchValue, setSearchValue ] = React.useState("");
     const [ openModal , setOpenModal ] = React.useState(false);
 
-    const url = "https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager";  
     const completedTodos = todos.filter(todo => !!todo.completed).length;
     const totalTodos = todos.length;
   
@@ -34,7 +33,7 @@ function TodoProvider(props){
           }
           const newTodos = [...todos];
           newTodos.push(newTodo);
-          const response = await axios.post(url, newTodo, {
+          const response = await axios.post("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager", newTodo, {
             mode: "cors",
             credentials: "include",
             headers: {
@@ -57,7 +56,7 @@ function TodoProvider(props){
         newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
         const updateTodo = async () => {
           try{
-            const response = await axios.patch(url + updatedTodo._id, 
+            const response = await axios.patch("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager" + updatedTodo._id, 
                   updatedTodo 
                 ,
               {
@@ -81,7 +80,7 @@ function TodoProvider(props){
             const todoIndex = todos.findIndex(todo => todo.text === text);
             const newTodos = [...todos];
             const deletedTodo = newTodos[todoIndex];
-            const response = await axios.delete(url + deletedTodo._id, {
+            const response = await axios.delete("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager" + deletedTodo._id, {
               mode: "cors",
               credentials: "include",
               headers: {
