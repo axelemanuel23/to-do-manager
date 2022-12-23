@@ -6,13 +6,15 @@ function useLocalStorage(){
     const [ loading, setLoading ] = React.useState(true);
     const [ todos, setTodos ] = React.useState([]);
     React.useEffect(() => {
+            const apiurl = process.env.APIURL;
+            const apikey = process.env.APIKEY;
             const getTodos = async () => {
                 try{
-                    const response = await axios.get("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager", {
+                    const response = await axios.get(apiurl, {
                         mode: "cors",
                         credentials: "include",
                         headers: {
-                            "APIKEY": "axel",
+                            "APIKEY": apikey,
                         }
                     });
                     const newTodos = [...response.data.data];
