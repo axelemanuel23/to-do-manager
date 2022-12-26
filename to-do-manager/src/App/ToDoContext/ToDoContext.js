@@ -56,7 +56,7 @@ function TodoProvider(props){
         newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
         const updateTodo = async () => {
           try{
-            const response = await axios.patch("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager" + updatedTodo._id, 
+            const response = await axios.patch("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager/" + updatedTodo._id, 
                   updatedTodo 
                 ,
               {
@@ -80,7 +80,7 @@ function TodoProvider(props){
             const todoIndex = todos.findIndex(todo => todo.text === text);
             const newTodos = [...todos];
             const deletedTodo = newTodos[todoIndex];
-            const response = await axios.delete("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager" + deletedTodo._id, {
+            const response = await axios.delete("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager/" + deletedTodo._id, {
               mode: "cors",
               credentials: "include",
               headers: {
