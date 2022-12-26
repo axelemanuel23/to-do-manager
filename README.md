@@ -1,5 +1,5 @@
 # to-do-manager
-Lista de Tareas pendientes
+Pending List
 
-Deploy en Netlify
-https://sensational-florentine-6e965d.netlify.app/
+You can check this code running in:
+https://to-do-manager-delta.vercel.app/
