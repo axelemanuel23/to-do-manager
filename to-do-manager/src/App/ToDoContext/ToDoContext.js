@@ -52,10 +52,10 @@ function TodoProvider(props){
     const completeTodo = (text) => {
         const todoIndex = todos.findIndex(todo => todo.text === text);
         const newTodos = [...todos];
-        const updatedTodo = newTodos[todoIndex];
         newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
         const updateTodo = async () => {
           try{
+            const updatedTodo = newTodos[todoIndex];
             const response = await axios.patch("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager/" + updatedTodo._id, 
                   updatedTodo 
                 ,
