@@ -33,7 +33,7 @@ function TodoProvider(props){
           }
           const newTodos = [...todos];
           newTodos.push(newTodo);
-          const response = await axios.post("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager", newTodo, {
+          const response = await axios.post("https://nodejs-backend-828bc7f2a7f7.herokuapp.com/api/v1/todomanager", newTodo, {
             mode: "cors",
             credentials: "include",
             headers: {
@@ -56,7 +56,7 @@ function TodoProvider(props){
         const updateTodo = async () => {
           try{
             const updatedTodo = newTodos[todoIndex];
-            const response = await axios.patch("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager/" + updatedTodo._id, 
+            const response = await axios.patch("https://nodejs-backend-828bc7f2a7f7.herokuapp.com/api/v1/todomanager" + updatedTodo._id, 
                   updatedTodo 
                 ,
               {
@@ -80,7 +80,7 @@ function TodoProvider(props){
             const todoIndex = todos.findIndex(todo => todo.text === text);
             const newTodos = [...todos];
             const deletedTodo = newTodos[todoIndex];
-            const response = await axios.delete("https://axelemanuel23githubio-backend-production.up.railway.app/api/v1/todomanager/" + deletedTodo._id, {
+            const response = await axios.delete("https://nodejs-backend-828bc7f2a7f7.herokuapp.com/api/v1/todomanager" + deletedTodo._id, {
               mode: "cors",
               credentials: "include",
               headers: {
