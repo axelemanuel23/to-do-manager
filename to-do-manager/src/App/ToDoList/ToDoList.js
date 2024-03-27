@@ -19,7 +19,7 @@ function ToDoList(){
                     {
                         searchedTodos.map((todo) => (
                             <ToDoItem
-                                key={todo._id}
+                                key={todo.text}
                                 text={todo.text}
                                 completed={todo.completed}
                                 onComplete={() => completeTodo(todo.text)}
