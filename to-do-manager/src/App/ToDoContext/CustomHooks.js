@@ -8,7 +8,7 @@ function useLocalStorage(){
     React.useEffect(() => {
             const getTodos = async () => {
                 try{
-                    const response = await axios.get("https://nodejs-backend-arch.vercel.app/api/v1/todomanager", {
+                    const response = await axios.get("https://nodejs-backend-arch.onrender.com/api/v1/todomanager", {
                         mode: "cors",
                         credentials: "include",
                         headers: {

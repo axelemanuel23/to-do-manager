@@ -33,7 +33,7 @@ function TodoProvider(props){
           }
           const newTodos = [...todos];
           newTodos.push(newTodo);
-          const response = await axios.post("https://nodejs-backend-arch.vercel.app/api/v1/todomanager", newTodo, {
+          const response = await axios.post("https://nodejs-backend-arch.onrender.com/api/v1/todomanager", newTodo, {
             mode: "cors",
             credentials: "include",
             headers: {
@@ -56,7 +56,7 @@ function TodoProvider(props){
         const updateTodo = async () => {
           try{
             const updatedTodo = newTodos[todoIndex];
-            const response = await axios.patch("https://nodejs-backend-arch.vercel.app/api/v1/todomanager" + updatedTodo._id, 
+            const response = await axios.patch("https://nodejs-backend-arch.onrender.com/api/v1/todomanager" + updatedTodo._id, 
                   updatedTodo 
                 ,
               {
@@ -80,7 +80,7 @@ function TodoProvider(props){
             const todoIndex = todos.findIndex(todo => todo.text === text);
             const newTodos = [...todos];
             const deletedTodo = newTodos[todoIndex];
-            const response = await axios.delete("https://nodejs-backend-arch.vercel.app/api/v1/todomanager" + deletedTodo._id, {
+            const response = await axios.delete("https://nodejs-backend-arch.onrender.com/api/v1/todomanager" + deletedTodo._id, {
               mode: "cors",
               credentials: "include",
               headers: {
